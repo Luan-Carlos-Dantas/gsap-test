@@ -8,74 +8,62 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 function App() {
-
   const el = useRef();
   const tl = useRef();
 
-  useLayoutEffect(() => {
+  useLayoutEffect(()=>{
 
     gsap.registerPlugin(ScrollTrigger);
-    gsap.to(".relogio", {
-      x: 0,
-      opacity: 1,
-      rotate: "0deg",
+
+    gsap.to('.relogio',{
+      x:0,
+      opacity:1,
+      rotate: '0deg',
       scrollTrigger:{
-        trigger: ".items",
-        //markers: true,
-        start: "top 520px",
-        end: "bottom 600px",
+        trigger: '.items',
+        markers: false,
+        start: 'top 400px',
+        end: 'bottom 450px',
         scrub: true
       }
     })
 
-    return () => {
-      gsap.killTweensOf(".relogio")
-    }
-  }, [])
+    return () => gsap.killTweensOf('.relogio')
+  },[])
 
-
-  useLayoutEffect(() => {
-
-    gsap.registerPlugin(ScrollTrigger)
-    const ctx = gsap.context(() => {
+  useLayoutEffect(()=>{
+    const ctx = gsap.context(()=>{
       tl.current = gsap.timeline({
         scrollTrigger:{
-          trigger:".models-item",
-          scrub: true,
-          // markers: true,
-          start: "top 800px",
-          end: "bottom 900px"
+          trigger:'.models-item',
+          scrub:true,
+          markers: false,
+          start:"top 600px",
+          end: "bottom 650px"
         }
+      }).fromTo('#model-1',{
+        opacity:0,
+        y:160
+      },{
+        opacity:1,
+        y:0
+      }).fromTo('#model-2',{
+        opacity:0,
+        y:170
+      },{
+        opacity:1,
+        y:0
+      }).fromTo('#model-3',{
+        opacity:0,
+        y:180
+      },{
+        opacity:1,
+        y:0
       })
-      .fromTo("#model-1", {
-        opacity: 0,
-        y: 160,
-      }, {
-        opacity: 1,
-        y: 0
-      })
-      .fromTo("#model-2", {
-        opacity: 0,
-        y: 160,
-      }, {
-        opacity: 1,
-        y: 0
-      })
-      .fromTo("#model-3", {
-        opacity: 0,
-        y: 160,
-      }, {
-        opacity: 1,
-        y: 0
-      })
-    }, el)
+    },el)
 
-
-    return () => {
-      gsap.killTweensOf(".models-item")
-    }
-
-  }, [])
+    return () => gsap.killTweensOf('.models-content')
+  },[])
 
   return (
     <div className="container">
@@ -123,7 +111,7 @@ function App() {
       <div className="area-model">
         <h1>ITEM 3</h1>
       </div>
-      
+
       <div className="area-model">
         <h1>ITEM 4</h1>
       </div>
